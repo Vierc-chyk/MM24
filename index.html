@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZERO DAY — Operator Console</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scanline"></div>
+
+<div id="topbar">
+  <div class="left">
+    <span>◉ NULLSEC OPS CONSOLE v3.0</span>
+    <span>OPERATOR: anonymous</span>
+    <span id="tb-status" class="blink">● CONNECTED</span>
+  </div>
+  <div class="right">
+    <span id="tb-clock">--:--:--</span>
+    <span id="tb-packets">PKT: 0</span>
+    <span id="tb-target">TARGET: none</span>
+  </div>
+</div>
+
+<div id="console">
+
+  <div class="panel" id="panel-wireshark">
+    <div class="panel-header">
+      <span>◉ WIRESHARK — LIVE CAPTURE</span>
+      <span class="status">CAPTURING</span>
+    </div>
+    <div class="panel-body" id="wireshark-body">
+      <div class="packet-header-row">
+        <span>#</span><span>SOURCE</span><span>DEST</span><span>PROTO</span><span>INFO</span>
+      </div>
+      <div id="packet-list"></div>
+    </div>
+    <div class="copy-hint">◉ Click a packet then Ctrl+C OR drag it into the terminal</div>
+  </div>
+
+  <div class="panel" id="panel-globe">
+    <div class="panel-header">
+      <span>◉ GLOBAL TRACE — EARTH</span>
+      <span class="status">INTERACTIVE</span>
+    </div>
+    <div class="panel-body" style="padding:0; position:relative;">
+      <canvas id="globe-canvas"></canvas>
+      <div id="globe-controls">
+        <button onclick="zoomGlobe(1.2)">＋</button>
+        <button onclick="zoomGlobe(0.8)">−</button>
+        <button onclick="resetGlobe()">⟳</button>
+      </div>
+      <div id="globe-hint">Drag to rotate • Scroll to zoom</div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-code">
+    <div class="panel-header">
+      <span>◉ EXECUTION ENGINE</span>
+      <span class="status">RUNNING</span>
+    </div>
+    <div class="panel-body">
+      <div id="code-lines"></div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-output">
+    <div class="panel-header">
+      <span>◉ INTEL OUTPUT</span>
+      <span class="status">STREAMING</span>
+    </div>
+    <div class="panel-body" id="output-body"></div>
+  </div>
+
+  <div class="panel" id="panel-terminal">
+    <div class="panel-header">
+      <span>◉ OPERATOR TERMINAL</span>
+      <span class="status">DROP PACKETS HERE</span>
+    </div>
+    <div id="terminal-output"></div>
+    <div id="terminal-input-line">
+      <span id="terminal-prompt">root@nullsec:~#</span>
+      <input type="text" id="terminal-input" autofocus autocomplete="off" spellcheck="false" placeholder="paste or drop a packet here...">
+    </div>
+  </div>
+
+</div>
+
+<div id="location-overlay">
+  <h3>📍 TARGET LOCATED</h3>
+  <div class="coord" id="loc-coords">0.0000, 0.0000</div>
+  <div class="detail-row"><span>IP ADDRESS</span><span id="loc-ip">—</span></div>
+  <div class="detail-row"><span>DEVICE</span><span id="loc-device">—</span></div>
+  <div class="detail-row"><span>OS</span><span id="loc-os">—</span></div>
+  <div class="detail-row"><span>CITY</span><span id="loc-city">—</span></div>
+  <div class="detail-row"><span>COUNTRY</span><span id="loc-country">—</span></div>
+  <div class="detail-row"><span>ISP</span><span id="loc-isp">—</span></div>
+  <button onclick="closeLocation()">CLOSE</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
